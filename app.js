@@ -54,8 +54,12 @@ app.route("/articles")
             res.send(err);
         else
             res.send("Successfully deleted every records..");
-    })
-})
+    });
+});
+
+
+
+
 /*****************REQUESTS TARGETING SINGLE RECORD ********************/
 app.route("/articles/:article")
 
@@ -80,7 +84,19 @@ app.route("/articles/:article")
         res.send(`successfully deleted record of ${article}`);
         else{res.send(err);}
     })
+})
+
+.put((req,res)=>{
+    const article = req.params.article;
+    Article.updateOne({title:article},{title:req.body.title,content:req.body.content},(err,found)=>{
+        if(!err)
+        res.send(`${article}'s record is updated`);
+        else
+        res.send(err);
+    });
 });
+
+
 app.listen(3000, () => {
     console.log("listenig on port 3000\nhttp://localhost:3000");
 });
