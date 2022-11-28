@@ -56,7 +56,31 @@ app.route("/articles")
             res.send("Successfully deleted every records..");
     })
 })
+/*****************REQUESTS TARGETING SINGLE RECORD ********************/
+app.route("/articles/:article")
 
+.get((req,res)=>{
+    const article = req.params.article;
+    Article.findOne({title:article},(err,found)=>{
+        if(!found){
+
+            res.send(`${article} not found!!!`);
+        }
+        else if(!err){
+
+            res.send(found);
+        }
+    })
+})
+
+.delete((req,res)=>{
+    const article = req.params.article;
+    Article.deleteOne({title:article},(err)=>{
+        if(!err)
+        res.send(`successfully deleted record of ${article}`);
+        else{res.send(err);}
+    })
+});
 app.listen(3000, () => {
     console.log("listenig on port 3000\nhttp://localhost:3000");
 });
