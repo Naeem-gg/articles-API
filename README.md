@@ -1,2 +1,2 @@
 # articles-API
-RESTful API using MERN stack
+RESTful API using NodeJs, ExpressJS and MongoDB(via mongoose) stack
