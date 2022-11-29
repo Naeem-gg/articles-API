@@ -94,6 +94,24 @@ app.route("/articles/:article")
         else
         res.send(err);
     });
+})
+
+.patch((req,res)=>{
+    Article.updateOne({title:req.params.article},{$set:req.body},(err)=>{
+        if(!err)
+        {res.send("Successfully updated "+req.params.article);}else{
+            res.send(err);
+        }
+    });
+})
+
+.delete((req,res)=>{
+    Article.deleteOne({title:req.params.article},(err,found)=>{
+        if(!err)
+        res.send("Deleted "+req.params.article);
+        else
+        res.send(err);
+    });
 });
 
 
